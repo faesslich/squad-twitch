@@ -1,0 +1,56 @@
+
+{% block main_inner %}
+    <div x-show="open" class="relative z-10">
+        <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>
+
+        <div class="fixed inset-0 overflow-hidden">
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+                    <div x-show="open" x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
+                        <div class="flex h-full flex-col overflow-y-scroll bg-white  v" x-data="{tab: 1}">
+                            <div>
+                                <div class="p-6">
+                                    <div class="flex items-start justify-between">
+                                        <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">Notizen</h2>
+                                        <div class="ml-3 flex h-7 items-center">
+                                            <button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-sky-500" @click="open = false">
+                                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-b border-gray-200">
+                                    <div class="px-6">
+                                        <nav class="-mb-px flex space-x-6">
+                                            {% for streamer in streamers %}
+                                                <a @click.prevent="tab = {{ loop.index }}" href="#" :class="{ 'border-sky-500 text-sky-600': tab == {{ loop.index }}, 'border-transparent hover:border-gray-300 hover:text-gray-700' : tab != {{ loop.index }} }" class="text-gray-500 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium">
+                                                    <span>{{ streamer }}</span>
+                                                </a>
+                                            {% endfor %}
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
+                                {% for streamer in streamers %}
+                                    <div x-show="tab == {{ loop.index }}" id="notesContainer">
+                                        <iframe id="twitch-chat-embed{{ loop.index }}" src="https://www.twitch.tv/embed/{{ streamer }}/chat?parent={{ app.request.getHttpHost() }}" height="500" width="350"></iframe>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="pt-4">
+                                <div id="notesCreateContainer" class="shadow-2xl shadow-gray-800 relative z-10"></div>
+                                <div class="flex flex-shrink-0 justify-end px-4 py-4 relative z-20 bg-white">
+                                    <button type="button" class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400" @click="open = false">Cancel</button>
+                                    <button type="submit" id="triggerNotesCreateContainer" class="ml-4 inline-flex justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500">Notiz hinzufügen</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

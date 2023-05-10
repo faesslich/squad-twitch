@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block head_styles %}
+    {{ parent() }}
+{% endblock %}
+
+{% if form is defined %}
+    {% form_theme form 'forms/tailwind_3_layout.html.twig' %}
+{% endif %}
+
+{% block body_tag %}
+<body id="{% block body_id %}{{ parent() }}{% endblock %}"
+    class="font-inter antialiased bg-slate-900 text-slate-600"
+    :class="{ 'sidebar-expanded': sidebarExpanded }"
+    x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
+    x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))"
+>
+{% endblock %}
+
+{% block main %}
+    <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <main class="h-full pt-16">
+            {% block main_inner %}
+                <div class="px-4 sm:px-6 lg:px-8 py-4 w-full relative h-full w-full flex flex-wrap align-items-center align-content-center">
+                    <div class="grid grid-cols-12 gap-4 xl:gap-6 w-full">
+                        {% for streamer in streamers %}
+                            <div class="col-span-12 {% if streamers|length >= 2 %}lg:col-span-6{% endif %} my-auto overflow-hidden twitch-embed-container-wrapper{% if streamers|length == 2 %} item-count-two{% elseif streamers|length == 3 %} item-count-three{% elseif streamers|length == 4 %} item-count-four{% endif %}">
+                                <div id="twitch-embed{{ loop.index }}" class="twitch-embed-container"></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endblock %}
+        </main>
+    </div>
+
+    {% block sidebar %}
+        {% include 'layout/sidebar/sidebar.html.twig' %}
+    {% endblock %}
+
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            TriggerChatExpanded();
+            fillInputsWithGivenData(['{{ streamers|join("','") | raw }}']);
+        });
+
+        setTimeout(() => {
+{% for streamer in streamers %}
+                var embed{{ loop.index }} = new Twitch.Embed("twitch-embed{{ loop.index }}", {
+                    channel: "{{ streamer }}",
+                    layout: "video",
+                    parent: ["{{ app.request.getHttpHost() }}"]
+                });
+                embed{{ loop.index }}.addEventListener(Twitch.Embed.VIDEO_READY, () => {
+                    var player = embed{{ loop.index }}.getPlayer();
+                    player.play();
+                });
+{% endfor %}
+        }, 100);
+    </script>
+{% endblock %}

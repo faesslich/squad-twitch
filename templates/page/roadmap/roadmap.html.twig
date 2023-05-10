@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block head_styles %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block main %}
+    <div class="bg-gray-900 w-full overflow-y-scroll">
+        <main>
+            <div class="bg-gray-900">
+                <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:py-40">
+                    <div class="mx-auto max-w-7xl">
+                        <h2 class="text-2xl font-bold leading-10 text-white">Unsere Roadmap</h2>
+                        <p class="mt-2 text-md text-gray-400"><strong>SquadTwitch</strong> befindet sich aktuell noch in einer frühen Entwicklungsphase und ist somit noch nicht abgeschlossen.<br>Allerdings haben wir weitere Updates in der Planung. Eine Übersicht über die aktuellen Entwicklungspläne findest du hier:</p>
+                        <dl class="mt-10 space-y-6 divide-y divide-white/10">
+                            {% for item in roadmap %}
+                                <div x-data="{ open: false }" class="pt-2">
+                                    <dt>
+                                        <button type="button" class="flex w-full items-start justify-between text-left text-white" @click="open = !open" aria-controls="faq-0" aria-expanded="false">
+                                            <span class="text-base font-semibold leading-7">
+                                                {{ item.label|raw }}
+                                            </span>
+                                            <span class="ml-6 flex h-7 items-center">
+                                                {% if item.implemented %}
+                                                    <span class="inline-flex items-center rounded-md bg-green-500/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-500/20 mr-4">Bereits implememtiert!</span>
+                                                {% elseif item.development %}
+                                                    <span class="inline-flex items-center rounded-md bg-yellow-500/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-500/20 mr-4">In Arbeit</span>
+                                                {% endif %}
+                                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :class="{ 'hidden': open }" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" /></svg>
+                                                <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :class="{ 'hidden': !(open) }" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" /></svg>
+                                            </span>
+                                        </button>
+                                    </dt>
+                                    <dd class="mt-2 pr-12" x-show="open">
+                                        <p class="text-base leading-7 text-gray-300">{{ item.value|raw }}</p>
+                                    </dd>
+                                </div>
+                            {% endfor %}
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+{% endblock %}

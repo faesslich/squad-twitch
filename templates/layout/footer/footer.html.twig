@@ -1,0 +1,26 @@
+{% block footer_wrapper %}
+    <footer aria-labelledby="footer-heading" class="relative w-full bg-gray-900 ">
+        <h2 id="footer-heading" class="sr-only">Footer</h2>
+        <div class="mx-auto max-w-7xl px-6 pb-8 pt-4 lg:px-8">
+            <div class="border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex space-x-6 md:order-2">
+                    <a target="_blank" href="https://www.twitch.tv/faesslich" class="text-gray-500 hover:text-gray-400">
+                        <span class="sr-only">Twitch</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 28 28" aria-hidden="true">
+                            <path transform="translate(2,2)" d="M2.149 0l-1.612 4.119v16.836h5.731v3.045h3.224l3.045-3.045h4.657l6.269-6.269v-14.686h-21.314zm19.164 13.612l-3.582 3.582h-5.731l-3.045 3.045v-3.045h-4.836v-15.045h17.194v11.463zm-3.582-7.343v6.262h-2.149v-6.262h2.149zm-5.731 0v6.262h-2.149v-6.262h2.149z" fill-rule="evenodd" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                    <a target="_blank" href="https://www.youtube.com/channel/UC0_GkT_6dZ7OZNycL266UAA" class="text-gray-500 hover:text-gray-400">
+                        <span class="sr-only">YouTube</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+                <p class="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
+                    &copy; {{ "now"|date("Y") }} SquadTwitch | <a href="{{ path('roadmap') }}">Roadmap</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

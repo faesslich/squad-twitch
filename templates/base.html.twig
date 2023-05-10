@@ -1,0 +1,60 @@
+{% apply spaceless %}
+<!DOCTYPE html>
+{% block html_tag %}<html class="h-full" lang="de">{% endblock %}
+{% block head %}
+    <head>
+        {% block head_inner %}
+            {% block head_meta %}
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            {% endblock %}
+            {% block title %}<title>{% block title_inner %}SquadTwitch - by Faesslich{% endblock %}</title>{% endblock %}
+            {% block head_styles %}
+                {{ encore_entry_link_tags('css/app') }}
+            {% endblock %}
+            {% block head_javascripts %}
+                {{ encore_entry_script_tags('app') }}
+            {% endblock %}
+            {% block head_links %}
+                <link rel="icon" href="{{ asset('build/images/favicon-16.png') }}" sizes="16x16" type="image/png" />
+                <link rel="icon" href="{{ asset('build/images/favicon-32.png') }}" sizes="32x32" type="image/png" />
+                <link rel="apple-touch-icon" href="{{ asset('build/images/apple-touch-icon.png') }}" />
+            {% endblock %}
+        {% endblock %}
+    </head>
+{% endblock %}
+
+{% block body %}
+    {% block body_tag %}
+
+        <body id="{% block body_id %}page-{{ app.request.attributes.get('_route') }}{% endblock %}"
+        class="font-inter antialiased text-slate-600 bg-gray-900 h-full"
+        :class="{ 'sidebar-expanded': sidebarExpanded }"
+        x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
+        x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))">
+    {% endblock %}
+    {% block body_inner %}
+        {% block header %}
+            {% include 'layout/header/header.html.twig' %}
+        {% endblock %}
+        <div class="flex overflow-hidden bg-gray-900 w-full">
+
+            {% block main %}
+                <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+                    <main class="h-full pt-16">
+                        {% block main_inner %}
+                        {% endblock %}
+                    </main>
+                </div>
+            {% endblock %}
+        </div>
+        {% include 'layout/footer/footer.html.twig' %}
+    {% endblock %}
+
+    {% block body_scripts %}
+        <script src="{{ asset('build/js/vendors/alpinejs.min.js') }}" defer></script>
+    {% endblock %}
+    </body>
+{% endblock %}
+</html>
+{% endapply %}

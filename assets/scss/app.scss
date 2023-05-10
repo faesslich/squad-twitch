@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=fallback');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+@tailwind base;
+@tailwind components;
+
+.twitch-embed-container-wrapper {
+  height: calc(100vh - 100px);
+
+  &.item-count-two {
+    height: calc(50vh - 60px);
+    @media (min-width: 1024px) {
+      height: 70vh;
+      max-height: 516px;
+    }
+    @media (min-width: 1921px) {
+      max-height: 696px;
+    }
+    @media (min-width: 2561px) {
+      max-height: 1056px;
+    }
+  }
+  &.item-count-three {
+    height: calc(33vh - 40px);
+    @media (min-width: 1024px) {
+      height: calc(50vh - 60px);
+    }
+  }
+
+  &.item-count-four {
+    height: calc(25vh - 35px);
+    @media (min-width: 1024px) {
+      height: calc(50vh - 60px);
+    }
+  }
+}
+
+.twitch-embed-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.twitch-chat-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 7.25rem);
+  overflow: hidden;
+
+  iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@tailwind utilities;
