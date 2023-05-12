@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}font-inter antialiased bg-slate-100 text-slate-600{% endblock %}
+{% block title_inner %}Registrierung - SquadTwitch{% endblock %}
+
+{% block main_inner %}
+    <div class="flex min-h-[600px] flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px] mb-32">
+            <div class="mb-8">
+                <h1 class="text-2xl md:text-3xl text-gray-200 font-bold">Registrierung</h1>
+            </div>
+            <div class="bg-slate-700 px-6 py-10 shadow sm:rounded-lg sm:px-12">
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.username) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-sky-600 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">Jetzt registrieren</button>
+                {{ form_end(registrationForm) }}
+
+                <div>
+                    <div class="relative mt-10">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm font-medium leading-6">
+                            <span class="bg-slate-700 px-6 text-gray-300">Oder</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <a href="javascript:;" disabled class="flex w-full items-center justify-center border border-white gap-3 rounded-md bg-[#5c16c5] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 28 28" aria-hidden="true">
+                                <path transform="translate(2,2)" d="M2.149 0l-1.612 4.119v16.836h5.731v3.045h3.224l3.045-3.045h4.657l6.269-6.269v-14.686h-21.314zm19.164 13.612l-3.582 3.582h-5.731l-3.045 3.045v-3.045h-4.836v-15.045h17.194v11.463zm-3.582-7.343v6.262h-2.149v-6.262h2.149zm-5.731 0v6.262h-2.149v-6.262h2.149z" fill-rule="evenodd" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm font-semibold leading-6">Twitch (coming soon)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-10 text-center text-sm text-gray-500">
+                 Account vorhanden?
+                <a href="/login" class="font-semibold leading-6 text-sky-600 hover:text-sky-500">Jetzt einloggen</a>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

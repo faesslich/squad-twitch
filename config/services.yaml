@@ -24,5 +24,11 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\EventListener\ImageUploadListener:
+        arguments:
+            - '@doctrine'
+            - '@security.token_storage'
+            - '@request_stack'
+        tags:
+            - {name: 'kernel.event_listener', event: 'oneup_uploader.post_persist', method: 'onUpload'}
+

@@ -1,21 +1,26 @@
 <?php
 
-namespace App\Controller\Dashboard;
+namespace App\Action;
 
-use App\Action\AbstractAction;
 use App\Form\StreamerSelectType;
+use App\Services\FlashMessageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-#[Route(data: '/', name: 'index')]
-class DashboardAction extends AbstractAction
+abstract class AbstractAction extends AbstractController
 {
-    public function __invoke(Request $request): Response
-    {
 
-        $streamerSearchForm = $this->buildStreamerSearchForm($request);
+    public static function getSubscribedServices(): array
+    {
+        return array_merge(parent::getSubscribedServices(), [
+            'flash.message.service' => '?' . FlashMessageService::class,
+        ]);
+    }
+
+    public function buildStreamerSearchForm(Request $request): RedirectResponse|FormInterface
+    {
         $form = $this->createForm(type: StreamerSelectType::class);
         $form->handleRequest(request: $request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -31,13 +36,7 @@ class DashboardAction extends AbstractAction
                 ]
             );
         }
-
-        return $this->render(
-            view: '@App/page/dashboard/dashboard.html.twig',
-            parameters: [
-                'streamerSearchForm' => $streamerSearchForm->createView(),
-                'form2' => $form->createView(),
-            ],
-        );
+        return $form;
     }
+
 }

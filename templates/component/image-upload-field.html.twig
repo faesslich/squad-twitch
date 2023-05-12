@@ -1,0 +1,24 @@
+{% block image_upload_field_wrapper %}
+    {% set image = images ? asset('uploads/' ~ folder ~ '/' ~ images|last.originalFileName)|imagine_filter('profile_thumb') : asset('/build/images/avatar.svg') %}
+    {% if images and 'svg' in images|last.originalFileName %}
+        {% set image = images ? asset('uploads/' ~ folder ~ '/' ~ images|last.originalFileName) : asset('/build/images/avatar.svg') %}
+    {% endif %}
+
+    <div class="flex mb-4 w-40 h-40 relative">
+        <div class="w-40 h-40 overflow-hidden rounded-full relative">
+            <img class="absolute w-full h-full object-cover object-center" src="{{ image }}" >
+        </div>
+        <form action="{{ action }}{{ username|default(null) ? '?username=' ~ username : '' }}" class="dropzone transition-opacity duration-500 w-40 h-40 rounded-full absolute hover:backdrop-blur-xs hover:opacity-100" style="border: 3px dashed #555; background: none;">
+            <div class="dz-message text-center mt-0 text-slate-200" data-dz-message>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto icon w-12 h-12 icon-tabler icon-tabler-camera-plus"  viewBox="0 0 24 24" stroke-width="1.5" stroke="#ddd" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="13" r="3" />
+                    <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                    <line x1="15" y1="6" x2="21" y2="6" />
+                    <line x1="18" y1="3" x2="18" y2="9" />
+                </svg>
+                <span>{{ changeText ? changeText : 'text.replace_image'|trans }}</span>
+            </div>
+        </form>
+    </div>
+{% endblock %}

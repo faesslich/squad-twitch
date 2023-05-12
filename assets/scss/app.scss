@@ -4,6 +4,69 @@
 @tailwind base;
 @tailwind components;
 
+@import "dropzone/src/dropzone";
+
+.aside-navigation-item {
+  @apply flex items-center px-2.5 py-2 rounded whitespace-nowrap text-slate-300;
+
+  &.active,
+  &:hover {
+    @apply bg-gray-100 text-sky-600;
+  }
+
+  i {
+    @apply mr-2 w-[30px] text-center;
+  }
+}
+
+.sidebar-item {
+  i {
+    @apply mr-2 w-[15px] text-center;
+  }
+}
+
+
+.dropzone {
+  background: rgba(0,0,0,.5) !important;
+
+  .dz-message {
+    margin-top: 1.375em !important;
+  }
+}
+
+.dz-started {
+  padding: 0 !important;
+  opacity: 1 !important;
+}
+
+.dropzone .dz-preview {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+
+  &.dz-image-preview {
+    background: none;
+  }
+
+  .dz-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+
 .twitch-embed-container-wrapper {
   height: calc(100vh - 100px);
 
@@ -67,6 +130,124 @@
     width: 100%;
     height: 100%;
   }
+}
+
+/* Typography */
+.h1 {
+  @apply text-4xl font-extrabold tracking-tighter;
+}
+
+.h2 {
+  @apply text-3xl font-extrabold tracking-tighter;
+}
+
+.h3 {
+  @apply text-3xl font-extrabold;
+}
+
+.h4 {
+  @apply text-2xl font-extrabold tracking-tight;
+}
+
+@screen md {
+  .h1 {
+    @apply text-5xl;
+  }
+
+  .h2 {
+    @apply text-4xl;
+  }
+}
+
+/* Buttons */
+.btn,
+.btn-lg,
+.btn-sm,
+.btn-xs {
+  @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out;
+}
+
+.btn {
+  @apply px-3 py-2;
+}
+
+.btn-lg {
+  @apply px-4 py-3;
+}
+
+.btn-sm {
+  @apply px-2 py-1;
+}
+
+.btn-xs {
+  @apply px-2 py-0.5;
+}
+
+.btn-primary {
+  @apply bg-sky-500 text-white;
+
+  &:hover {
+    @apply bg-sky-600;
+  }
+  &:active {
+    @apply bg-sky-700;
+  }
+}
+
+.listing-table {
+  @apply table-auto w-full;
+
+  thead {
+    @apply text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200;
+
+    th {
+      @apply px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap font-semibold text-left;
+    }
+  }
+
+  tbody {
+    @apply text-sm divide-y divide-slate-200;
+
+    tr {
+      td {
+        @apply px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap;
+      }
+    }
+  }
+}
+
+/* Forms */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 1px #fff inset, 0 0 0 30px rgb(17, 24, 39) inset !important;
+  border: 1px solid #fff;
+}
+input:-webkit-autofill{
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.ck-editor__editable {
+  @apply rounded-sm border-slate-200 shadow-sm;
+  min-height: 230px !important;
 }
 
 @tailwind utilities;

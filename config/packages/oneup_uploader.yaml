@@ -1,0 +1,6 @@
+oneup_uploader:
+    mappings:
+        user_avatar:
+            frontend: dropzone
+            storage:
+                directory: "%kernel.project_dir%/public/uploads/user"

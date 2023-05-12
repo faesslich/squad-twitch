@@ -1,0 +1,26 @@
+label:
+    title: Titel
+    name: Name
+    username: Benutzername
+    email: E-Mail Adresse
+    firstName: Vorname
+    lastName: Nachname
+    password: Passwort
+    current_password: Aktuelles Passwort
+    new_password: Neues Passwort
+    new_password_confirm: Passwort bestätigen
+    save_password: Passwort speichern
+    edit: bearbeiten
+    registrationDate: Registriert am
+
+title:
+    change_password: Passwort ändern
+
+text:
+    replace_image: Bild ersetzen
+
+modal:
+    title: Eintrag löschen
+    description: Das Löschen dieses Eintrags kann nicht rückgängig gemacht werden.
+    cancel: Abbrechen
+    delete: Löschen

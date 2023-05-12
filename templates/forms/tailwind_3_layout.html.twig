@@ -11,7 +11,7 @@
 {%- endblock widget_attributes -%}
 
 {%- block form_label -%}
-    {%- set label_attr = label_attr|merge({ class: label_attr.class|default(label_class|default('block text-sm font-medium mt-0.5 mb-0.5')) }) -%}
+    {%- set label_attr = label_attr|merge({ class: label_attr.class|default(label_class|default('block text-xs text-gray-400 font-medium mt-0.5 mb-0.5')) }) -%}
     {{- parent() -}}
 {%- endblock form_label -%}
 
@@ -40,7 +40,7 @@
     {%- if errors|length > 0 -%}
         <ul>
             {%- for error in errors -%}
-                <li class="{{ error_item_class|default('text-red-700') }}">{{ error.message }}</li>
+                <li class="{{ error_item_class|default('text-xs py-1 text-red-600') }}">{{ error.message }}</li>
             {%- endfor -%}
         </ul>
     {%- endif -%}

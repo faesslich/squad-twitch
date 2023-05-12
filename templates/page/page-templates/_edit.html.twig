@@ -1,0 +1,29 @@
+{% extends '@App/base.html.twig' %}
+
+{% if form is defined %}
+    {% form_theme form 'forms/tailwind_3_layout.html.twig' %}
+{% endif %}
+
+{% block head_styles %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main_inner %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block body_scripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/vendors/dropzone.min.js') }}"></script>
+
+    <script>
+        Dropzone.options.myDropzone = {
+            url: '{{ path(app.request.get('_route')) }}',
+            paramName: "file",
+            maxFilesize: 2,
+            thumbnailWidth: 250,
+            thumbnailHeight: 250,
+        };
+    </script>
+{% endblock %}

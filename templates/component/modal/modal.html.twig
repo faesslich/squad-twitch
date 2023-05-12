@@ -1,0 +1,47 @@
+{% block modal_wrapper %}
+<div x-show="{{ xData }}" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
+        <div x-cloak @click="{{ xData }} = false" x-show="{{ xData }}"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 transition-opacity bg-gray-800 bg-opacity-40" aria-hidden="true"
+        ></div>
+
+        <div x-cloak x-show="{{ xData }}"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             class="fixed inset-0 z-50 overflow-hidden flex items-center my-4 justify-center px-4 sm:px-6"
+        >
+            <div class="bg-white rounded shadow-lg overflow-auto max-w-lg w-full max-h-full" @click.outside="{{ xData }} = false" @keydown.escape.window="{{ xData }} = false">
+                <div class="px-5 py-3 border-b border-slate-200">
+                    <div class="flex justify-between items-center">
+                        <div class="font-semibold text-slate-800">{{ title|default('modal.title'|trans) }}</div>
+                        <a href="javascript:;" class="inline-block -mx-2 px-2 text-slate-400 hover:text-slate-500" @click="{{ xData }} = false">
+                            <i class="fa-solid fa-xmark"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="px-5 pt-4 pb-1">
+                    <div class="text-sm text-left">
+                        <div class="space-y-2">{{ description|default('modal.description'|trans) }}</div>
+                    </div>
+                </div>
+                <div class="px-5 py-4">
+                    <div class="flex flex-wrap justify-end space-x-2">
+                        <button class="btn-sm border-slate-200 hover:border-slate-300 text-slate-600" @click="{{ xData }} = false">{{ cancelTitle|default('modal.cancel'|trans) }}</button>
+                        <a href="{{ acceptUrl }}" class="btn-sm btn-primary">{{ acceptTitle|default('modal.delete'|trans) }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

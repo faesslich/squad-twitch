@@ -20,7 +20,7 @@ function TriggerChatExpanded() {
                     elem.setAttribute('src', '/blank.html');
                 });
             }
-        }, 300);
+        }, 500);
     });
 }
 window.TriggerChatExpanded = TriggerChatExpanded;

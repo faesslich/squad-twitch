@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Controller\Dashboard;
+namespace App\Controller\Security;
 
-use App\Action\AbstractAction;
 use App\Form\StreamerSelectType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-#[Route(data: '/', name: 'index')]
-class DashboardAction extends AbstractAction
+#[Route(data: '/login', name: 'login')]
+class SecurityLoginAction extends AbstractController
 {
-    public function __invoke(Request $request): Response
-    {
+    use TargetPathTrait;
 
-        $streamerSearchForm = $this->buildStreamerSearchForm($request);
+    public function __invoke(Request $request, AuthenticationUtils $helper): Response
+    {
         $form = $this->createForm(type: StreamerSelectType::class);
         $form->handleRequest(request: $request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -32,12 +33,23 @@ class DashboardAction extends AbstractAction
             );
         }
 
+        if ($this->getUser()) {
+            return $this->redirectToRoute(route: 'index');
+        }
+
+        $this->saveTargetPath(
+            session: $request->getSession(),
+            firewallName: 'main',
+            uri: $this->generateUrl(route: 'index')
+        );
+
         return $this->render(
-            view: '@App/page/dashboard/dashboard.html.twig',
+            view: 'page/login/login.html.twig',
             parameters: [
-                'streamerSearchForm' => $streamerSearchForm->createView(),
-                'form2' => $form->createView(),
-            ],
+                'last_username' => $helper->getLastUsername(),
+                'error' => $helper->getLastAuthenticationError(),
+                'form' => $form->createView(),
+            ]
         );
     }
 }
