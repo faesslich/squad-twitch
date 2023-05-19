@@ -33,8 +33,8 @@ class RoadmapAction extends AbstractController
             [
                 'label' => 'User-Verwaltung',
                 'value' => 'In naher Zukunft wird es möglich sein, bei SquadTwitch ein Konto zu erstellen. Dies ermöglicht es uns, ein personalisiertes Erlebnis für euch zu schaffen. Wir werden in den folgenden Entwicklungsplänen näher darauf eingehen, was dies beinhaltet.',
-                'implemented' => false,
-                'development' => true
+                'implemented' => true,
+                'development' => false
             ],
             [
                 'label' => 'Dark- & Light-Mode',
@@ -67,14 +67,14 @@ class RoadmapAction extends AbstractController
                 'development' => true
             ],
             [
-                'label' => 'Stream-Auswahl aus Follower-Liste',
-                'value' => 'Ihr seid kein Fan vom Tippen? Kein Problem! Wenn ihr euren Twitch-Account mit SquadTwitch verknüpft habt, werdet ihr in Zukunft einfach Streamer aus eurer Follow-Liste auswählen können, ohne etwas eingeben zu müssen.',
-                'implemented' => false,
+                'label' => 'Favoriten!',
+                'value' => 'Schaut ihr oft die gleichen Streamer parallel? Zukünftig werdet ihr in der Lage sein, bereits kombinierte Streams zu euren Favoriten hinzuzufügen, so dass ihr sie nicht jedes Mal neu auswählen müsst.',
+                'implemented' => true,
                 'development' => false
             ],
             [
-                'label' => 'Favoriten!',
-                'value' => 'Schaut ihr oft die gleichen Streamer parallel? Zukünftig werdet ihr in der Lage sein, bereits kombinierte Streams zu euren Favoriten hinzuzufügen, so dass ihr sie nicht jedes Mal neu auswählen müsst.',
+                'label' => 'Stream-Auswahl aus Follower-Liste',
+                'value' => 'Ihr seid kein Fan vom Tippen? Kein Problem! Wenn ihr euren Twitch-Account mit SquadTwitch verknüpft habt, werdet ihr in Zukunft einfach Streamer aus eurer Follow-Liste auswählen können, ohne etwas eingeben zu müssen.',
                 'implemented' => false,
                 'development' => false
             ],

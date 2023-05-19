@@ -24,7 +24,18 @@ abstract class AbstractAction extends AbstractController
         $form = $this->createForm(type: StreamerSelectType::class);
         $form->handleRequest(request: $request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $values = array_values(array_filter($form->getData()));
+            $inputValues = $form->getData();
+
+            $values = array_values(array_filter([
+                $inputValues['favorites'][0] ?? null,
+                $inputValues['favorites'][1] ?? null,
+                $inputValues['favorites'][2] ?? null,
+                $inputValues['favorites'][3] ?? null,
+                $inputValues['slug1'],
+                $inputValues['slug2'],
+                $inputValues['slug3'],
+                $inputValues['slug4']
+            ]));
 
             return $this->redirectToRoute(
                 route: 'watch',

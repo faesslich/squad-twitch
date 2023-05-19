@@ -15,6 +15,7 @@
 
 {% block body_scripts %}
     {{ parent() }}
+    <script src="https://unpkg.com/tagin@2.0.2/dist/tagin.min.js"></script>
     <script src="{{ asset('build/js/vendors/dropzone.min.js') }}"></script>
 
     <script>
@@ -25,5 +26,21 @@
             thumbnailWidth: 250,
             thumbnailHeight: 250,
         };
+    </script>
+
+    <script>
+        document.querySelectorAll('[data-tagin="true"]').forEach((el) => {
+            if (el instanceof HTMLInputElement) {
+                var tagin = new Tagin(el);
+            }
+        })
+
+        var testValue = new Tagin(document.getElementById('test-value'))
+        document.getElementById('get').addEventListener('click', function () {
+            var value = testValue.getTag();
+            var values = JSON.stringify(testValue.getTags());
+            document.getElementById('value-container').innerHTML = `${value}<br>${values}`;
+        });
+
     </script>
 {% endblock %}

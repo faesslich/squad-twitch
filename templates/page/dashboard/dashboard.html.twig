@@ -20,8 +20,14 @@
                             <div>
                                 <div class="text-center">
                                     <h3 class="text-base font-semibold leading-6 text-gray-400 pt-6" id="modal-title">Wähle deine Streamer</h3>
+                                    {% if app.user.streamers %}<p class="text-xs leading-6 text-gray-400">(Maximal 4 Streamer - Wählst du mehr aus, werden nur die ersten 4 genommen!)</p>{% endif %}
                                 </div>
                                 <div class="grid grid-cols-12 gap-4 mt-3">
+                                    {% if app.user.streamers %}
+                                        <div class="col-span-12">
+                                            {{ form_widget(form2.favorites) }}
+                                        </div>
+                                    {% endif %}
                                     <div class="col-span-12 lg:col-span-3">{{ form_widget(form2.slug1) }}</div>
                                     <div class="col-span-12 lg:col-span-3">{{ form_widget(form2.slug2) }}</div>
                                     <div class="col-span-12 lg:col-span-3">{{ form_widget(form2.slug3) }}</div>
@@ -44,4 +50,11 @@
 
 {% block body_scripts %}
     {{ parent() }}
+    <script>
+        window.addEventListener('load', () => {
+            MultiselectDropdown({
+                placeholder: 'Wähle aus deinen Favoriten'
+            });
+        });
+    </script>
 {% endblock %}

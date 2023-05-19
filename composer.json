@@ -1,4 +1,5 @@
 {
+    "name": "faesslich/squad-twitch",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

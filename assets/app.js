@@ -80,7 +80,7 @@ function MultiselectDropdown(options) {
         const div = newEl('div', {
             class: 'multiselect-dropdown',
         });
-        el.style.display = 'none';
+        el.style.display = 'none !important';
         el.parentNode.insertBefore(div, el.nextSibling);
 
         const listWrap = newEl('div', { class: 'multiselect-dropdown-list-wrapper' });

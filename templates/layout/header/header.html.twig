@@ -31,11 +31,14 @@
                                 <div>
                                     <div class="text-center">
                                         <h3 class="text-base font-semibold leading-6 text-gray-200" id="modal-title">Wähle deine Streamer</h3>
-                                        <div class="mt-1">
-                                            <p class="text-sm text-gray-400">Wähle bis zu 4 Streamer aus, die du gleichzeitig schauen möchtest.</p>
-                                        </div>
+                                        {% if app.user.streamers %}<p class="text-xs leading-6 text-gray-400">(Maximal 4 Streamer - Wählst du mehr aus, werden nur die ersten 4 genommen!)</p>{% endif %}
                                     </div>
                                     <div class="grid grid-cols-12 gap-4 mt-3">
+                                        {% if app.user.streamers %}
+                                            <div class="col-span-12">
+                                                {{ form_widget(streamerSearchForm.favorites) }}
+                                            </div>
+                                        {% endif %}
                                         <div class="col-span-12 lg:col-span-6">{{ form_widget(streamerSearchForm.slug1) }}</div>
                                         <div class="col-span-12 lg:col-span-6">{{ form_widget(streamerSearchForm.slug2) }}</div>
                                         <div class="col-span-12 lg:col-span-6">{{ form_widget(streamerSearchForm.slug3) }}</div>
